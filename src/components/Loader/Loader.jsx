@@ -1,8 +1,10 @@
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import { TailSpin } from 'react-loader-spinner';
+import { SpinnerDiamond } from 'spinners-react';
 
-function Loader() {
-  return <TailSpin color="#00BFFF" height={80} width={80} />;
-}
-
+const Loader = () => {
+  const style = {
+    display: 'block',
+    margin: '30 auto',
+  };
+  return <SpinnerDiamond style={style} color={'#3f51b5'} size={40} />;
+};
 export default Loader;

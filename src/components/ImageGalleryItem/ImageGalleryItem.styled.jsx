@@ -17,3 +17,6 @@ export const GalleryItemImg = styled.img`
     cursor: zoom-in;
   }
 `;
+export const ImageGaleryLink = styled.a`
+  width: 100%;
+`;
