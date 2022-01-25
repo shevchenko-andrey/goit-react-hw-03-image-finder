@@ -28,6 +28,12 @@ class App extends Component {
     if (query !== prevQuery) {
       this.getImagesData();
     }
+    if (this.state.page > 2) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+    }
   }
   getImagesData = async () => {
     try {
@@ -71,7 +77,7 @@ class App extends Component {
         <ImageGallery images={images} />
 
         {status === PENDING && <Loader />}
-        {status !== RESJECTED && page <= totalPages && (
+        {status === RESOLVED && page <= totalPages && (
           <Button onClick={this.handleLoadMore} />
         )}
         {status === RESJECTED && <NotFaundMassage image={imageNotFaund} />}
