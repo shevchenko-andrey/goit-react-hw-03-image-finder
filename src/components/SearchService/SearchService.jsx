@@ -12,6 +12,7 @@ function SearchService({ children, onSubmit }) {
 }
 SearchService.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  children: PropTypes.node,
 };
 
 export default SearchService;
