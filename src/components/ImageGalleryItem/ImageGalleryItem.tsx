@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types';
+import IImage from 'interfaces/Image.interface';
 
 import {
   ImageItem,
   GalleryItemImg,
   ImageGaleryLink,
 } from './ImageGalleryItem.styled';
-function ImageGalleryItem({ webformatURL, tags, largeImageURL }) {
-  console.log(webformatURL);
+
+function ImageGalleryItem({ webformatURL, tags, largeImageURL }: IImage) {
   return (
     <ImageItem>
       <ImageGaleryLink href={largeImageURL}>
@@ -15,9 +15,5 @@ function ImageGalleryItem({ webformatURL, tags, largeImageURL }) {
     </ImageItem>
   );
 }
-ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-};
+
 export default ImageGalleryItem;

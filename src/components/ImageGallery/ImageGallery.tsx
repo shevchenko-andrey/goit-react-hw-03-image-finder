@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types';
 import { SRLWrapper } from 'simple-react-lightbox';
 import ImageGalleryItem from 'components/ImageGalleryItem';
 import { GalleryImages } from './ImageGallery.styled';
-
+import IImage from 'interfaces/Image.interface';
 const options = {
   settings: {
     overlayColor: 'rgba(0, 0, 0, 0.8)',
@@ -28,8 +27,11 @@ const options = {
     showProgressBar: false,
   },
 };
+interface Props {
+  images: IImage[];
+}
 
-function ImageGallery({ images }) {
+function ImageGallery({ images }: Props) {
   if (images.length === 0) {
     return <></>;
   } else {
@@ -38,6 +40,7 @@ function ImageGallery({ images }) {
         <GalleryImages>
           {images.map(({ id, webformatURL, tags, largeImageURL }) => (
             <ImageGalleryItem
+              id={id}
               key={id}
               tags={tags}
               webformatURL={webformatURL}
@@ -49,14 +52,5 @@ function ImageGallery({ images }) {
     );
   }
 }
-ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      largeImageURL: PropTypes.string.isRequired,
-      webformatURL: PropTypes.string.isRequired,
-      tags: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
+
 export default ImageGallery;

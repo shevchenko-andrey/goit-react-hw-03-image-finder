@@ -1,7 +1,8 @@
 import { ErrorImage, ErrorWrapper } from './NotFaundStyled';
-import PropTypes from 'prop-types';
-
-function NotFaundMassage({ image }) {
+interface Props {
+  image: string;
+}
+function NotFaundMassage({ image }: Props) {
   return (
     <>
       <ErrorWrapper>
@@ -10,7 +11,5 @@ function NotFaundMassage({ image }) {
     </>
   );
 }
-NotFaundMassage.propTypes = {
-  image: PropTypes.string.isRequired,
-};
+
 export default NotFaundMassage;

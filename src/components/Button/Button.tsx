@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
 import { LoadMore } from './Button.syled';
-const Button = ({ onClick }) => {
+interface Props {
+  onClick: () => void;
+}
+const Button = ({ onClick }: Props) => {
   return (
     <LoadMore type="button" onClick={onClick}>
       Load more
@@ -8,7 +10,4 @@ const Button = ({ onClick }) => {
   );
 };
 
-Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
 export default Button;

@@ -1,8 +1,10 @@
-import PropTypes from 'prop-types';
-
 import Searchbar from 'components/Searchbar';
 
-function SearchService({ children, onSubmit }) {
+interface Props {
+  onSubmit: (query: string) => void;
+  children: any;
+}
+function SearchService({ children, onSubmit }: Props) {
   return (
     <>
       <Searchbar onSubmit={onSubmit} />
@@ -10,9 +12,5 @@ function SearchService({ children, onSubmit }) {
     </>
   );
 }
-SearchService.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  children: PropTypes.node,
-};
 
 export default SearchService;

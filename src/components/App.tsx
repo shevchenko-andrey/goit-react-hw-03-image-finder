@@ -6,11 +6,22 @@ import Button from './Button';
 import Loader from './Loader';
 import status from '../Constants/status';
 import NotFaundMassage from './EroorUi/NotFaundMasage';
-import imageNotFaund from '../images/400error.jpg';
+import IImage from 'interfaces/Image.interface';
 
 const { IDLE, RESOLVED, RESJECTED, PENDING } = status;
 
-class App extends Component {
+interface State {
+  query: string;
+  page: number;
+  totalPages: number;
+  images: IImage[];
+  status: string;
+}
+interface Props {
+  state: State;
+}
+
+class App extends Component<Props, State> {
   static defaultProps = {
     state: {
       query: '',
@@ -22,12 +33,13 @@ class App extends Component {
   };
   state = this.props.state;
 
-  async componentDidUpdate(_, prevState) {
+  async componentDidUpdate(_: Props, prevState: State) {
     const prevQuery = prevState.query;
     const { query } = this.state;
     if (query !== prevQuery) {
       this.getImagesData();
     }
+
     if (this.state.page > 2) {
       window.scrollTo({
         top: document.documentElement.scrollHeight,
@@ -38,9 +50,15 @@ class App extends Component {
   getImagesData = async () => {
     try {
       this.setState({ status: PENDING });
+
       const { query, page } = this.state;
       const response = await ImageFinderAPI(query, page);
+      if (!response) {
+        this.setState({ status: RESJECTED });
+        return;
+      }
       const { totalPages, images } = response;
+
       if (totalPages < 1) {
         this.setState({ status: RESJECTED });
         return;
@@ -58,7 +76,7 @@ class App extends Component {
       this.setState({ status: RESJECTED });
     }
   };
-  handleFormSubmit = query => {
+  handleFormSubmit = (query: string) => {
     if (query !== this.state.query) {
       this.setState(() => {
         return { query, page: 1, images: [] };
@@ -80,7 +98,9 @@ class App extends Component {
         {status === RESOLVED && page <= totalPages && (
           <Button onClick={this.handleLoadMore} />
         )}
-        {status === RESJECTED && <NotFaundMassage image={imageNotFaund} />}
+        {status === RESJECTED && (
+          <NotFaundMassage image="/goit-react-hw-03-image-finder/static/media/400error.95a2aa0cb584fc361455.jpg" />
+        )}
       </SearchService>
     );
   }
